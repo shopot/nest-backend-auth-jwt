@@ -1,0 +1,25 @@
+@hostname = 127.0.0.1
+@port = 3000
+@host = http://{{hostname}}:{{port}}
+@contentType = application/json
+
+
+### Get public route
+GET {{host}}/api/public
+
+### Get public route
+GET {{host}}/api/protected
+
+
+### WhoAmI
+GET {{host}}/api/auth/whoami
+
+
+### Login
+POST {{host}}/api/auth/signin
+Content-Type: {{contentType}}
+
+{
+    "username": "admin",
+    "password": "test"
+}

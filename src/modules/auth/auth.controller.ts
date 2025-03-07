@@ -1,13 +1,30 @@
-import { Body, Controller, Get, HttpCode, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, HttpCode, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 
 import { AuthDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { AccessTokenGuard } from './guards';
+import { hasUser } from './helpers';
 
 @Controller('/auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
+
+    @Get('/logout')
+    @UseGuards(AccessTokenGuard)
+    async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+        if (hasUser(req)) {
+            const userId = (req.cookies.userId as string) || '';
+
+            await this.authService.logout(userId);
+
+            this.authService.clearAuthCookie(res);
+
+            return { message: 'success', statusCode: 200 };
+        } else {
+            throw new BadRequestException('Bad request');
+        }
+    }
 
     @HttpCode(200)
     @Post('/signin')

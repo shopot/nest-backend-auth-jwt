@@ -7,3 +7,6 @@ export const safeParseInt = (value: string | undefined, defaultValue: number): n
 
     return isNaN(parsed) ? defaultValue : parsed;
 };
+
+export const isObjectEmpty = (objectName: object): boolean =>
+    Object.keys(objectName).length === 0 && objectName.constructor === Object;

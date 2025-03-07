@@ -23,3 +23,7 @@ Content-Type: {{contentType}}
     "username": "admin",
     "password": "test"
 }
+
+
+### Logout
+GET {{host}}/api/auth/logout

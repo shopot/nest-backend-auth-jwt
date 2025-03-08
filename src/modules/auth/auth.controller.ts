@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import { AccessTokenGuard } from './guards';
 import { hasUser } from './helpers';
 
-@Controller('/auth')
+@Controller('/api/auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
 

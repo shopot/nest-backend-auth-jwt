@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { TransformInstanceToPlain } from 'class-transformer';
 
-import { AppNotFoundException } from '#core/exceptions';
 import { User } from '#modules/users';
 
 import { CreateUserDto, UpdateUserDto } from './users.dto';
@@ -38,7 +37,7 @@ export class UsersService {
         }
 
         if (!user) {
-            throw new AppNotFoundException('User not found.');
+            throw new NotFoundException('User not found.');
         }
 
         return Promise.resolve(user);
@@ -48,7 +47,7 @@ export class UsersService {
         const index = users.findIndex((user) => user.id === id);
 
         if (index === -1) {
-            throw new AppNotFoundException('User not found.');
+            throw new NotFoundException('User not found.');
         }
 
         users[index] = {

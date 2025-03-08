@@ -7,7 +7,7 @@
 ### Get public route
 GET {{host}}/api/public
 
-### Get public route
+### Get protected route
 GET {{host}}/api/protected
 
 
@@ -25,5 +25,19 @@ Content-Type: {{contentType}}
 }
 
 
+### Bad Login
+POST {{host}}/api/auth/signin
+Content-Type: {{contentType}}
+
+{
+    "username": "admin1",
+    "password": "test1"
+}
+
+
 ### Logout
 GET {{host}}/api/auth/logout
+
+
+### Get hello
+GET {{host}}/api/hello
